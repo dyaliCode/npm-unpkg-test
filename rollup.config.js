@@ -1,44 +1,51 @@
-import svelte from "rollup-plugin-svelte";
-import resolve from "rollup-plugin-node-resolve";
-import browsersync from "rollup-plugin-browsersync";
-import { terser } from "rollup-plugin-terser";
-import commonjs from "rollup-plugin-commonjs";
-import pkg from "./package.json";
-import sveltePreprocess from "svelte-preprocess";
-import postcss from "rollup-plugin-postcss";
+import analyze from 'rollup-plugin-analyzer';
+import autoPreprocess from 'svelte-preprocess';
+import bundleSize from 'rollup-plugin-bundle-size';
+import commonjs from 'rollup-plugin-commonjs';
+import resolve from 'rollup-plugin-node-resolve';
+import svelte from 'rollup-plugin-svelte';
+import { terser } from 'rollup-plugin-terser';
+import pkg from './package.json';
 
-const watch = process.env.WATCH;
-const mainpath = watch ? "docs/index.js" : pkg.main;
-const dedupe = importee =>
-  importee === "svelte" || importee.startsWith("svelte/");
+const production = !process.env.ROLLUP_WATCH;
 
-const scssOptions = {
-  transformers: {
-    scss: {
-      includePaths: ["node_modules", "src"]
-    },
-    postcss: {
-      plugins: [require("autoprefixer")]
-    }
-  }
-};
+const { name } = pkg;
 
 export default {
-  input: "src/index.js",
+  input: 'src/index.js',
   output: [
-    { file: pkg.module, format: "es" },
-    { file: mainpath, format: "iife" }
+    {
+      file: pkg.module,
+      format: 'es',
+      sourcemap: true,
+      name,
+    },
+    {
+      file: pkg.main,
+      format: 'umd',
+      sourcemap: true,
+      name,
+    },
   ],
   plugins: [
-    commonjs(),
     svelte({
-      preprocess: sveltePreprocess(scssOptions)
+      // enable run-time checks when not in production
+      dev: !production,
+      // generate: production ? 'dom' : 'ssr',
+      hydratable: true,
+      preprocess: autoPreprocess({
+        postcss: {
+          plugins: [require('autoprefixer')()],
+        },
+      })
     }),
-    resolve({
-      dedupe
-    }),
-    postcss(),
-    watch && browsersync({ server: "docs" }),
-    !watch && terser()
-  ]
-};
+    resolve(),
+    commonjs(),
+    production && terser(),
+    production && analyze(),
+    production && bundleSize(),
+  ],
+  watch: {
+    clearScreen: false,
+  }
+}
