@@ -1,24 +1,23 @@
 <script>
-  import clsx from "clsx";
   // Declar variables.
   export let tag = "div";
   export let classes = [];
 </script>
 
 {#if tag === 'span'}
-  <span class={classes.length > 0 ? clsx(classes) : null}>
+  <span class={classes.length > 0 ? classes : null}>
     <slot />
   </span>
 {:else if tag === 'small'}
-  <small class={classes.length > 0 ? clsx(classes) : null}>
+  <small class={classes.length > 0 ? classes : null}>
     <slot />
   </small>
 {:else if tag === 'strong'}
-  <strong class={classes.length > 0 ? clsx(classes) : null}>
+  <strong class={classes.length > 0 ? classes : null}>
     <slot />
   </strong>
 {:else}
-  <div class={classes.length > 0 ? clsx(classes) : null}>
+  <div class={classes.length > 0 ? classes : null}>
     <slot />
   </div>
 {/if}

@@ -1,10 +1,10 @@
 {
-  "name": "svelte-formly",
+  "name": "npm-unpkg-test",
   "svelte": "src/index.js",
   "module": "dist/svelteformly.es.js",
   "main": "dist/svelteformly.js",
   "jsnext:main": "dist/svelteformly.es.js",
-  "version": "0.0.1S",
+  "version": "0.0.1",
   "author": "Kamal Sahmoud <maroc.develop@gmail.com>",
   "contributors": [
     "Kamal Sahmoud <maroc.develop@gmail.com>"
@@ -101,7 +101,5 @@
       "context": true
     }
   },
-  "dependencies": {
-    "clsx": "^1.0.4"
-  }
+  "dependencies": {}
 }

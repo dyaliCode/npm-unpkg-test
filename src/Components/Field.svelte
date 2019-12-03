@@ -1,7 +1,6 @@
 <script>
   import { onMount, onDestroy } from "svelte";
   import { get } from "svelte/store";
-  import clsx from "clsx";
   import { validator } from "../Validation/";
   import { valuesForm } from "./stores.js";
   // Import components.

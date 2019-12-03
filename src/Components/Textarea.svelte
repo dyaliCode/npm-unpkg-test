@@ -1,6 +1,5 @@
 <script>
   import { createEventDispatcher, onMount } from "svelte";
-  import clsx from "clsx";
   // Declar variables.
   export let id = "";
   export let name = "";
@@ -30,7 +29,7 @@
 <textarea
   {id}
   {name}
-  class={clsx(classe)}
+  class={classe}
   {required}
   {disabled}
   {rows}

@@ -1,6 +1,5 @@
 <script>
   import { createEventDispatcher, onMount } from "svelte";
-  import clsx from "clsx";
   // Declar variables.
   export let name = "";
   export let classe = "";
@@ -29,7 +28,7 @@
   <div class={aligne === 'inline' ? 'form-check-inline' : 'form-check'}>
     <input
       type="radio"
-      class={clsx(classe)}
+      class={classe}
       id={radio.id}
       {name}
       value={radio.value}

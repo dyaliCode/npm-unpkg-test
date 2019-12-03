@@ -1,6 +1,5 @@
 <script>
   import { createEventDispatcher, onMount } from "svelte";
-  import clsx from "clsx";
   // Declar variables.
   export let type = "text";
   export let id = "";
@@ -37,7 +36,7 @@
   {id}
   {name}
   {value}
-  class={clsx(classe)}
+  class={classe}
   {placeholder}
   {disabled}
   {min}

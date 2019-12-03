@@ -1,6 +1,5 @@
 <script>
   import { createEventDispatcher, onMount } from "svelte";
-  import clsx from "clsx";
   // Declar variables.
   export let id = "";
   export let name = "";
@@ -26,7 +25,7 @@
   });
 </script>
 
-<select {id} {name} class={clsx(classe)} {disabled} on:input={onChangeValue}>
+<select {id} {name} class={classe} {disabled} on:input={onChangeValue}>
   {#each options as option (option.value)}
     <option value={option.value}>{option.title}</option>
   {:else}
